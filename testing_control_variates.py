@@ -65,7 +65,6 @@ start = time()
 
 for mandel_itr in mandelbrot_itr:
     
-    print(mandel_itr)
     area_data = []
     
     for samp_size in sample_sizes:

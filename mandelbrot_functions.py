@@ -73,7 +73,7 @@ def circle_test(points, circle_radius):
     solution = np.zeros(number_of_points)
     
     for i in range(number_of_points):
-        x = points[i][0] 
+        x = points[i][0]
         y = points[i][1]
         radius = np.sqrt(x**2 + y**2)
         if radius <= circle_radius:
@@ -306,7 +306,7 @@ def covariate_mandelbrot_area_estimation(sample_size, sampling_method, experimen
     var_y = np.var(circle_areas)
     covvar_xy = np.cov(mandelbrot_areas, circle_areas)[0][1]
     
-    c = var_x - covvar_xy/var_y
+    c = - covvar_xy/var_y
     
     Z = mandelbrot_areas + c*(circle_areas-expected_circle_area)
     
