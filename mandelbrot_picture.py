@@ -7,8 +7,7 @@ from time import time
 
 
 """
-in this file there are the function uset to make the pictures of the fractal
-
+This file contains the functions to create a picture of the fractal
 """
 
 def mandelbrot(c,iterations):
@@ -51,14 +50,10 @@ def mandelbrot_plot(division,iterations,re_axis,im_axis,name):
 
   im.save(name, 'PNG')
 
-"""
-Uncomment the code below to show the fractals
-"""
-start_time = time() 
 
-mandelbrot_plot(15000,1000,[-2,0.75],[-1.25,1.25],"full_fractal_high_res")
+# Uncomment the code below to show the fractal and a zoomed in version
+
+# mandelbrot_plot(15000,1000,[-2,0.75],[-1.25,1.25],"full_fractal_high_res")
 # mandelbrot_plot(5000,1000,[-0.57,-0.4],[-0.5,-0.625],"zoom1")
 
 
-end_time = time()       
-print('The runtime was', (end_time-start_time)/(60*60), 'hours') 

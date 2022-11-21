@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Nov  8 22:54:59 2022
+Created on Fri Nov 18 20:47:35 2022
 
 @author: arong
 """
-
 import numpy as np
 import matplotlib.pyplot as plt
 import random
@@ -15,10 +14,10 @@ from mandelbrot_functions import *
 import pandas as pd
 
 """
-This file contains the experiment to test the effect of increasing 
-Mandelbrot function iterations on the accuracy of the estimation of the 
-Mandelbrot set Area. The experiment is performed for a few values of sample
-size but is kept constant for one experiment.
+This file contains the experiment to test the effect of increasing sample
+size on the accuracy of the estimation of the Mandelbrot set Area. The
+experiment is performed for a few values of Mandelbrot function iterations 
+but is kept constant for one experiment.
 
 Uncomment one of the sampling methods below along with its corresponding 
 experiment name so that the file is saved accordingly
@@ -47,26 +46,29 @@ xmax = 0.75
 ymin = -1.25
 ymax = 1.25
 
-# for each value of sample size a new file will be created storing the 
-# resulting area estimations for each point in mandelbrot_itr in a seperate
+# for each value of mandelbrot iterations a new file will be created storing 
+# the resulting area estimations for each point in sample_sizes in a seperate
 # column
-sample_sizes = [100, 625, 4225, 22500, 160000]
+mandelbrot_itr = np.logspace(1, 4, 4)
 
-# different number of mandelbrot iterations to test for sample size
-mandelbrot_itr = np.logspace(1, 4, 20)
+# different sample sizes to test for each number of mandelbrot iterations
+sample_sizes = np.linspace(50, 10000, 50)
+sample_sizes = [int(np.sqrt(x))**2 for x in list(sample_sizes)]
+sample_sizes = np.array(sample_sizes)
 
 # set the seed accoring to the experiment name above
-seed = ord(str(experiment_name)[0]) * ord(str(experiment_name[1]))
+seed = ord(str(experiment_name)[0]) + ord(str(experiment_name[1]))
 
 ######################### Performing Experiment #############################
 
 start = time()
 
-for samp_size in sample_sizes:
-    print(samp_size)
+for mandel_itr in mandelbrot_itr:
+    
+    print(mandel_itr)
     area_data = []
     
-    for mandel_itr in mandelbrot_itr:
+    for samp_size in sample_sizes:
     
         data = mandelbrot_set_area_estimate(samp_size, sampling_method, experiment_itr, int(mandel_itr), xmin, xmax, ymin, ymax, seed)
         area_data.append(data)
@@ -74,12 +76,10 @@ for samp_size in sample_sizes:
         seed += 1
         
     save_data = np.array(area_data).transpose()
-    columns = [str(int(x)) for x in mandelbrot_itr]
+    columns = [str(int(x)) for x in sample_sizes]
     df = pd.DataFrame(save_data, columns = columns)
-    df.to_csv('iterations_test/'+experiment_name+'_'+str(samp_size)+'_samples'+'.csv')
+    df.to_csv('sample_size_test/'+experiment_name+'_'+str(mandel_itr)+'_iterations'+'.csv')
         
 end = time()
 runtime = ((end-start)/60)/60
 print("run time = ",runtime," hours")
-        
-        

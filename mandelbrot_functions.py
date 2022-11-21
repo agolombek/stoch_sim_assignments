@@ -55,13 +55,25 @@ def mandelbrot_test(points, iterations):
 
 @njit
 def circle_test(points, circle_radius):
+    """
+    This function checks whether a set of points is inside or outside a circle
+    centered at (-0.25, 0) with a given radius.
+    --------------------------------------------------------------------------
+    The first argument is the x and y values of the points to be tested in the 
+    form of a n by 2 matrix with n being the number of points to be tested.
+    
+    The second argument is the radius of the circle.
+    --------------------------------------------------------------------------
+    The fuction returns an array of 0 and 1 with a 1 indicating that the point 
+    at that index is inside the circle, while a 0 indicates that it is outside.
+    """
     # check how many points are being parsed and create an array containing 
     # zeros in the corresponding size
     number_of_points = np.shape(points)[0]
     solution = np.zeros(number_of_points)
     
     for i in range(number_of_points):
-        x = points[i][0]
+        x = points[i][0] 
         y = points[i][1]
         radius = np.sqrt(x**2 + y**2)
         if radius <= circle_radius:
@@ -239,7 +251,30 @@ def mandelbrot_set_area_estimate(sample_size, sampling_method, experiment_itr, m
 
 @njit
 def covariate_mandelbrot_area_estimation(sample_size, sampling_method, experiment_itr, mandelbrot_itr, xmin, xmax, ymin, ymax, seed, circle_radius):
+    """
+    This function estimates the area of the madelbrot set given specific 
+    parameters and repeats the experiment a given number of times. It makes
+    use of control variates, specifically a circle centered at (-0.25,0) with 
+    a given radius.
+    --------------------------------------------------------------------------
+    The argumnets of this function are firstly the sample size and secondly a 
+    function determining by which method the sample si to be generated.
     
+    The third input is the number of times the experiment is to be repeated 
+    with a different seed. The fourth input is the number of times each point
+    in the sample is tested for divergence according to the criteria of the
+    mandelbrot set.
+    
+    xmin, xmax, ymin and ymax determine the size of the sample space where 
+    points are to be sampled and the final input seed is the seed for the
+    first experiment.
+    
+    The final input circle_radius is the radius of the circle used as a control
+    variate.
+    --------------------------------------------------------------------------
+    The function returns an array with Area estimates in the size of the third
+    input i.e. experiment iterations.
+    """
     mandelbrot_areas = np.zeros(experiment_itr)
     circle_areas = np.zeros(experiment_itr)
     
