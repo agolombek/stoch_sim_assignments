@@ -40,13 +40,22 @@ This file contains a report written on this topic with all the relevant results 
 ### sample_size_test
 This folder contains the results of the experiments performed in testing_sample_size.py and testing_control_variates.py. Furthermore it contains files to plot these results in an appropriate manner (figures stored in plots folder) and to both perform and visualize the signifcance testing (figures stored in correspong subfolder of plots). Below will be a breif outline of the python scripts within the folder.
 
-plotting_sample_size_results
-plotting_with_control_variates
-welch_test
-levene_test
-welch_test_method_comparison
-levene_test_method_comparison
-welch_test_control_variates
-levene_test_method_comparison
+**plotting_sample_size_results.py -** plots results of experiments with varying smaple size
+
+**plotting_with_control_variates.py -** plots results experiments with varying smaple size and corresponding experiments using control variates
+
+**welch_test.py -** performs and plots welch's test between a specified value in dataset to all other values of the same experiment (i.e. same method but different experiment parameters)
+
+**levene_test.py -** performs and plots leven's test between a specified value in dataset to all other values of the same experiment (i.e. same method but different experiment parameters)
+
+**welch_test_method_comparison.py -** performs and plots welch's test comparing all tested methods (i.e. same experiment parameters but across different methods)
+
+**levene_test_method_comparison.py -** performs and plots levene's test comparing all tested methods (i.e. same experiment parameters but across different methods)
+
+**welch_test_control_variates.py -**  performs and plots welch's test comparing results for equal experiment parameters of all methods with and without control variates 
+
+**levene_test_control_variates.py -**  performs and plots levene's test comparing results for equal experiment parameters of all methods with and without control variates 
 
 ### iterations_test
+
+This folder contains the results of the experimnets relating to varying mandelbrot function iterations performed using the file testing_mandelbrot_iterations.py. The structure and files contained is the same as for the folder detailed above with the exception that it does not include any results or graphs relating to control variates as these were not tested to increasing mandelbrot iterations as the reduction in variance rather than the convergence to the "real area" was to be tested.
